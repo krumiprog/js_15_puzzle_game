@@ -1,0 +1,287 @@
+$wite-color: #fff;
+$grey-color: grey;
+$black-color: #000;
+$shadow-color: rgba(0, 0, 0, 0.7);
+$background-color: rgb(150, 200, 140);
+
+$roboto-font: sans-serif;
+
+%box {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 500px;
+}
+
+%btn_menu {
+  color: $background-color;
+  background: transparent;
+  border: 1px solid $background-color;
+  font-weight: bold;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    color: $shadow-color;
+    background: $background-color;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: $background-color;
+}
+
+.score-panel {
+  @extend %box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: $roboto-font;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $wite-color;
+  text-shadow: 0px 3px 5px $shadow-color;
+  user-select: none;
+}
+
+.system-panel {
+  @extend %box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    font-family: $roboto-font;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px;
+    color: $wite-color;
+    background: none;
+    outline: none;
+    border: 1px solid $wite-color;
+    border-radius: 5px;
+    transition: color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
+    text-shadow: 0px 3px 5px $shadow-color;
+    box-shadow: 0px 10px 15px -5px $shadow-color;
+    user-select: none;
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.8);
+      background: $wite-color;
+      text-shadow: none;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+
+    &:disabled {
+      color: $grey-color;
+      background: $wite-color;
+      border: 1px solid $grey-color;
+      text-shadow: none;
+    }
+  }
+}
+
+.menu {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  color: $background-color;
+  background: $shadow-color;
+  font-family: $roboto-font;
+  font-weight: bold;
+  overflow: hidden;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+    width: 100%;
+    max-width: 300px;
+    padding: 50px 10px;
+    border-radius: 10px;
+    background: $shadow-color;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+
+.menu__btn {
+  @extend %btn_menu;
+  width: 100%;
+  padding: 5px;
+}
+
+.btn_options {
+  border: none;
+}
+
+.btn_item {
+  @extend %btn_menu;
+  width: 60px;
+}
+
+.menu__options {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  overflow: hidden;
+  border: 1px solid $background-color;
+  transition: all 0.5s;
+  box-sizing: border-box;
+
+  &_show {
+    height: 90px;
+  }
+}
+
+.options {
+  box-sizing: border-box;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 5px;
+  width: 100%;
+  padding: 5px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__board-size {
+    width: 60px;
+    color: $background-color;
+    background: transparent;
+    outline: none;
+    border: 1px solid $background-color;
+
+    option {
+      background: $black-color;
+    }
+  }
+}
+
+.select-board-size {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+}
+
+.score-table {
+  width: 100%;
+  margin: 15px 0;
+  text-align: center;
+
+  tbody {
+    font-weight: normal;
+  }
+}
+
+.username-input {
+  margin: 15px 0;
+  color: $background-color;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $background-color;
+  outline: none;
+  text-align: center;
+}
+
+.game-board {
+  @extend %box;
+
+  position: relative;
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-gap: 0;
+  margin: 15px 0;
+  border-radius: 5px;
+  background: $wite-color;
+  box-shadow: 0px 20px 30px -10px $shadow-color;
+  transition: all 0.3s ease-in-out;
+
+  &_gap {
+    padding: 15px;
+    grid-gap: 10px;
+  }
+}
+
+.game-board::before {
+  content: '';
+  width: 0;
+  padding-bottom: 100%;
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+}
+
+.game-board > *:first-child {
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: $wite-color;
+  transition: all 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  &_shadow {
+    box-shadow: 0px 5px 5px $shadow-color;
+  }
+
+  &_hidden {
+    opacity: 0;
+  }
+
+  &__number {
+    font-family: $roboto-font;
+    font-size: 2.5rem;
+    user-select: none;
+    text-shadow: 0px 3px 5px $shadow-color;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .game-board {
+    &_gap {
+      padding: 5px;
+      grid-gap: 5px;
+    }
+  }
+
+  .tile {
+    &__number {
+      font-size: 1.5rem;
+    }
+  }
+}
